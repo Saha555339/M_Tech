@@ -11,6 +11,6 @@ Test task for M_Tech.
    docker run --name my_app_v1 -p 8501:8501 my_streamlit_app
 
 *. Чтобы остановить приложение, выполните:
-  ```bash
-  docker stop my_app_v1
+   ```bash
+   docker stop my_app_v1
 
