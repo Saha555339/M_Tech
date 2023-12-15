@@ -10,7 +10,7 @@ Test task for M_Tech.
    ```bash
    docker run --name my_app_v1 -p 8501:8501 my_streamlit_app
 
-Чтобы остановить приложение, выполните:
+*. Чтобы остановить приложение, выполните:
   ```bash
-  docker stop my_app_v1```
+  docker stop my_app_v1
 
