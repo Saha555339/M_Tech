@@ -97,13 +97,14 @@ class HypothesisTesting:
     return statistic, p_value
 
 
-  def testing_the_hypothesis_of_avg(self, df1, df2):
+  def testing_the_hypothesis_of_avg(self, df1, df2) -> tuple:
     '''
     Проверка гипотезы о том, что среднее первой выборки больше, чем среднее второй.
     (В качестве дополнительных проверок: тест на наормальность, на коррелируемость)
 
     Return:
-      is_first_avg_more_then_second: bool, tests: pd.DataFrame
+      is_first_avg_more_then_second: bool, 
+      tests: list
     
     tests: df с полями | Название теста | Statistics/Corr | p_value |
     '''
@@ -119,6 +120,15 @@ class HypothesisTesting:
     test2 = {'Название теста': 'Спирмен', 'Statistics/Corr': corr, 
             'p_value': p_value_corr}
     tests.append(test2)
+
+
+
+    ## Проверка гипотезы о среднем происзодит следующим образом.
+    # Сначала проводится тест Шапиро-Уилка на нормальность.
+    # И тест Спирмена на коррелируемость значений.
+    # Если данные распределены нормально, то используется T-критерий Стьюдента (для коррелируемых и нет выборо соответственно)
+    # Если данные не распределены нормально, то используются непараметрический методы.
+    # U-критерий Манна-Уитниа для некоррелируемых выборок и критерий Уилкоксона для коррелируемых.
 
     if p_value_norm < .05:
       if corr > 0.7 and p_value_corr > .05:
@@ -161,3 +171,4 @@ class HypothesisTesting:
           return True, tests
         else:
           return False, tests
+
